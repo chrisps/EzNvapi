@@ -21,7 +21,7 @@ namespace lightweight_nvapi {
 		NV_D3D12_RESOURCE_FLAG_CPUVISIBLE_VIDMEM = 2,      //!< Hint to create resource in cpuvisible vidmem
 	};
 
-	struct NV_RESOURCE_PARAMS_V1
+	struct NV_RESOURCE_PARAMS
 	{
 		uint32_t                     version;          //!<Version of structure. Must always be first member
 		NV_D3D12_RESOURCE_FLAGS   NVResourceFlags;  //!<Additional NV specific flags (set the NV_D3D12_RESOURCE_FLAG_HTEX bit to create HTEX texture)
@@ -37,7 +37,7 @@ namespace lightweight_nvapi {
 		REFIID                    riid,
 		void** ppvResource,
 		bool* pSupported);
-	using id_NvAPI_D3D12_CreateCommittedResource = 0x27E98AEu;
+	constexpr nvintfid_t id_NvAPI_D3D12_CreateCommittedResource = 0x27E98AEu;
 #endif
 	class nvapi_state_t {
 		HMODULE nvapi64_;
