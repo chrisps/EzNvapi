@@ -65,6 +65,7 @@ namespace lightweight_nvapi {
 			return available_;
 		}
 	};
+	inline
 	bool nvapi_state_t::call_init_interface() {
 		int result = -1;
 		auto initInterfaceEx = query_interface<int(int)>(0xAD298D3F);
@@ -75,11 +76,12 @@ namespace lightweight_nvapi {
 			}
 		}
 		else {
-			result = initInterfaceEx(1);
+			result = initInterfaceEx(0); //originally called with 1, but was getting return error -6
 		}
 		return result == 0;
 
 	}
+	inline
 	void nvapi_state_t::call_deinit_interface() {
 
 
@@ -94,7 +96,7 @@ namespace lightweight_nvapi {
 			}
 		}
 	}
-
+	inline
 	bool nvapi_state_t::init_ptrs() {
 		if (!nvapi64_)
 			return false;
@@ -110,11 +112,13 @@ namespace lightweight_nvapi {
 		return true;
 
 	}
+	inline
 	nvapi_state_t::~nvapi_state_t() {
 		if (available_) {
 			call_deinit_interface();
 		}
 	}
+	inline
 	void init_nvapi() {
 		///HMODULE moddy = LoadLibraryA("nvapi64.dll");
 
